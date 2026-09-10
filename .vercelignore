@@ -1,0 +1,9 @@
+.git
+.gitignore
+README.md
+DEPLOY_VERCEL.md
+README_DEPLOY.md
+CHANGELOG.md
+docs/
+scripts/
+backups/
