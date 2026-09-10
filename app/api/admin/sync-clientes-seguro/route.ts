@@ -1,166 +1,498 @@
-import { db } from '@/lib/db'
-import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth'
-import { google } from 'googleapis'
+﻿import 
+export const dynamic = 'force-dynamic'
+{ db } from '@/lib/db'
+import 
+export const dynamic = 'force-dynamic'
+{ NextRequest, NextResponse } from 'next/server'
+import 
+export const dynamic = 'force-dynamic'
+{ getServerSession } from 'next-auth/next'
+import 
+export const dynamic = 'force-dynamic'
+{ authOptions } from '@/lib/auth'
+import 
+export const dynamic = 'force-dynamic'
+{ google } from 'googleapis'
 
-export async function POST(req: NextRequest) {
-  try {
+export const dynamic = 'force-dynamic'
+
+export async function POST(req: NextRequest) 
+export const dynamic = 'force-dynamic'
+{
+  try 
+export const dynamic = 'force-dynamic'
+{
     const session = await getServerSession(authOptions)
-    if (!session?.accessToken) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+export const dynamic = 'force-dynamic'
+
+    if (!session?.accessToken) 
+export const dynamic = 'force-dynamic'
+{
+      return NextResponse.json(
+export const dynamic = 'force-dynamic'
+{ error: 'Unauthorized' }, { status: 401 })
     }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
     // Crear cliente de Drive con token del usuario
+export const dynamic = 'force-dynamic'
+
     const oauth2Client = new google.auth.OAuth2()
-    oauth2Client.setCredentials({
+export const dynamic = 'force-dynamic'
+
+    oauth2Client.setCredentials(
+export const dynamic = 'force-dynamic'
+{
       access_token: session.accessToken,
+export const dynamic = 'force-dynamic'
+
     })
-    const drive = google.drive({ version: 'v3', auth: oauth2Client })
+export const dynamic = 'force-dynamic'
+
+    const drive = google.drive(
+export const dynamic = 'force-dynamic'
+{ version: 'v3', auth: oauth2Client })
+
+export const dynamic = 'force-dynamic'
 
     const clientesFolderId = process.env.DRIVE_FOLDER_CLIENTES_ID
-    if (!clientesFolderId) {
-      return NextResponse.json(
-        { error: 'DRIVE_FOLDER_CLIENTES_ID no configurado' },
-        { status: 400 }
-      )
-    }
+export const dynamic = 'force-dynamic'
 
-    console.log('🔄 Iniciando sincronización desde Drive...')
+    if (!clientesFolderId) 
+export const dynamic = 'force-dynamic'
+{
+      return NextResponse.json(
+export const dynamic = 'force-dynamic'
+
+        
+export const dynamic = 'force-dynamic'
+{ error: 'DRIVE_FOLDER_CLIENTES_ID no configurado' },
+        
+export const dynamic = 'force-dynamic'
+{ status: 400 }
+      )
+export const dynamic = 'force-dynamic'
+
+    }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+    console.log('ðŸ”„ Iniciando sincronizaciÃ³n desde Drive...')
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
     // Listar carpetas de clientes
-    const response = await drive.files.list({
-      q: `'${clientesFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+export const dynamic = 'force-dynamic'
+
+    const response = await drive.files.list(
+export const dynamic = 'force-dynamic'
+{
+      q: `'$
+export const dynamic = 'force-dynamic'
+{clientesFolderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
       spaces: 'drive',
+export const dynamic = 'force-dynamic'
+
       fields: 'files(id, name)',
+export const dynamic = 'force-dynamic'
+
       pageSize: 100,
+export const dynamic = 'force-dynamic'
+
       supportsAllDrives: true,
+export const dynamic = 'force-dynamic'
+
     })
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
     const carpetas = response.data.files || []
-    console.log(`Encontradas ${carpetas.length} carpetas`)
+export const dynamic = 'force-dynamic'
+
+    console.log(`Encontradas $
+export const dynamic = 'force-dynamic'
+{carpetas.length} carpetas`)
+
+export const dynamic = 'force-dynamic'
 
     let clientesCreados = 0
-    let tramitesCreados = 0
+export const dynamic = 'force-dynamic'
 
-    for (const carpeta of carpetas) {
+    let tramitesCreados = 0
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+    for (const carpeta of carpetas) 
+export const dynamic = 'force-dynamic'
+{
       if (!carpeta.name) continue
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
       // Parsear: "TR-00001 - NombreCliente"
+export const dynamic = 'force-dynamic'
+
       const match = carpeta.name.match(/TR-(\d+)\s*-?\s*(.+)/i)
-      if (!match) {
-        console.log(`⚠️ No se pudo parsear: ${carpeta.name}`)
+export const dynamic = 'force-dynamic'
+
+      if (!match) 
+export const dynamic = 'force-dynamic'
+{
+        console.log(`âš ï¸ No se pudo parsear: $
+export const dynamic = 'force-dynamic'
+{carpeta.name}`)
         continue
+export const dynamic = 'force-dynamic'
+
       }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
       const [, codigo, nombreCliente] = match
-      const codigoTramite = `TR-${codigo.padStart(5, '0')}`
+export const dynamic = 'force-dynamic'
+
+      const codigoTramite = `TR-$
+export const dynamic = 'force-dynamic'
+{codigo.padStart(5, '0')}`
       const clienteTrim = nombreCliente.trim()
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
       // Buscar cliente existente
-      const clienteExistente = await db.cliente.findFirst({
-        where: {
-          nombreCompleto: {
+export const dynamic = 'force-dynamic'
+
+      const clienteExistente = await db.cliente.findFirst(
+export const dynamic = 'force-dynamic'
+{
+        where: 
+export const dynamic = 'force-dynamic'
+{
+          nombreCompleto: 
+export const dynamic = 'force-dynamic'
+{
             contains: clienteTrim,
+export const dynamic = 'force-dynamic'
+
           },
+export const dynamic = 'force-dynamic'
+
         },
+export const dynamic = 'force-dynamic'
+
       })
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
       let cliente
-      if (!clienteExistente) {
-        cliente = await db.cliente.create({
-          data: {
+export const dynamic = 'force-dynamic'
+
+      if (!clienteExistente) 
+export const dynamic = 'force-dynamic'
+{
+        cliente = await db.cliente.create(
+export const dynamic = 'force-dynamic'
+{
+          data: 
+export const dynamic = 'force-dynamic'
+{
             nombreCompleto: clienteTrim,
+export const dynamic = 'force-dynamic'
+
             email: 'contacto@example.com',
-            nacionalidad: 'España',
+export const dynamic = 'force-dynamic'
+
+            nacionalidad: 'EspaÃ±a',
+export const dynamic = 'force-dynamic'
+
             telefono: '000000000',
+export const dynamic = 'force-dynamic'
+
           },
+export const dynamic = 'force-dynamic'
+
         })
+export const dynamic = 'force-dynamic'
+
         clientesCreados++
-        console.log(`✅ Cliente creado: ${clienteTrim}`)
-      } else {
+export const dynamic = 'force-dynamic'
+
+        console.log(`âœ… Cliente creado: $
+export const dynamic = 'force-dynamic'
+{clienteTrim}`)
+      } else 
+export const dynamic = 'force-dynamic'
+{
         cliente = clienteExistente
-        console.log(`ℹ️ Cliente ya existe: ${clienteTrim}`)
+export const dynamic = 'force-dynamic'
+
+        console.log(`â„¹ï¸ Cliente ya existe: $
+export const dynamic = 'force-dynamic'
+{clienteTrim}`)
       }
+export const dynamic = 'force-dynamic'
 
-      // Crear trámite
-      const tramiteExistente = await db.tramite.findFirst({
-        where: {
+
+export const dynamic = 'force-dynamic'
+
+      // Crear trÃ¡mite
+export const dynamic = 'force-dynamic'
+
+      const tramiteExistente = await db.tramite.findFirst(
+export const dynamic = 'force-dynamic'
+{
+        where: 
+export const dynamic = 'force-dynamic'
+{
           codigo: codigoTramite,
-          clienteId: cliente.id,
-        },
-      })
+export const dynamic = 'force-dynamic'
 
-      if (!tramiteExistente) {
-        // Determinar tipo de trámite del nombre
-        let tipoTramite = 'Trámite General'
-        if (clienteTrim.toLowerCase().includes('arraigo')) {
+          clienteId: cliente.id,
+export const dynamic = 'force-dynamic'
+
+        },
+export const dynamic = 'force-dynamic'
+
+      })
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+      if (!tramiteExistente) 
+export const dynamic = 'force-dynamic'
+{
+        // Determinar tipo de trÃ¡mite del nombre
+export const dynamic = 'force-dynamic'
+
+        let tipoTramite = 'TrÃ¡mite General'
+export const dynamic = 'force-dynamic'
+
+        if (clienteTrim.toLowerCase().includes('arraigo')) 
+export const dynamic = 'force-dynamic'
+{
           tipoTramite = 'Arraigo Sociolaboral'
-        } else if (clienteTrim.toLowerCase().includes('nacionalidad')) {
+export const dynamic = 'force-dynamic'
+
+        } else if (clienteTrim.toLowerCase().includes('nacionalidad')) 
+export const dynamic = 'force-dynamic'
+{
           tipoTramite = 'Nacionalidad por residencia'
-        } else if (clienteTrim.toLowerCase().includes('nombre')) {
+export const dynamic = 'force-dynamic'
+
+        } else if (clienteTrim.toLowerCase().includes('nombre')) 
+export const dynamic = 'force-dynamic'
+{
           tipoTramite = 'Cambio de nombre'
+export const dynamic = 'force-dynamic'
+
         }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
         // Obtener tramiteConfigId por tipoTramite
-        const tramiteConfig = await db.tramiteConfiguracion.findFirst({
-          where: { tipoTramite },
-        })
+export const dynamic = 'force-dynamic'
 
-        if (!tramiteConfig) {
-          console.warn(`⚠️ Tipo de trámite "${tipoTramite}" no encontrado`)
+        const tramiteConfig = await db.tramiteConfiguracion.findFirst(
+export const dynamic = 'force-dynamic'
+{
+          where: 
+export const dynamic = 'force-dynamic'
+{ tipoTramite },
+        })
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+        if (!tramiteConfig) 
+export const dynamic = 'force-dynamic'
+{
+          console.warn(`âš ï¸ Tipo de trÃ¡mite "$
+export const dynamic = 'force-dynamic'
+{tipoTramite}" no encontrado`)
           continue
-        }
+export const dynamic = 'force-dynamic'
 
-        await db.tramite.create({
-          data: {
+        }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+        await db.tramite.create(
+export const dynamic = 'force-dynamic'
+{
+          data: 
+export const dynamic = 'force-dynamic'
+{
             codigo: codigoTramite,
+export const dynamic = 'force-dynamic'
+
             clienteId: cliente.id,
+export const dynamic = 'force-dynamic'
+
             tramiteConfigId: tramiteConfig.id,
+export const dynamic = 'force-dynamic'
+
             estado: 'en_proceso',
+export const dynamic = 'force-dynamic'
+
             honorarios: 0,
+export const dynamic = 'force-dynamic'
+
             driveFolderId: carpeta.id,
-            notas: `Sincronizado desde Drive: ${carpeta.name}`,
+export const dynamic = 'force-dynamic'
+
+            notas: `Sincronizado desde Drive: $
+export const dynamic = 'force-dynamic'
+{carpeta.name}`,
           },
+export const dynamic = 'force-dynamic'
+
         })
+export const dynamic = 'force-dynamic'
+
         tramitesCreados++
-        console.log(`✅ Trámite creado: ${codigoTramite}`)
-      } else {
-        console.log(`ℹ️ Trámite ya existe: ${codigoTramite}`)
+export const dynamic = 'force-dynamic'
+
+        console.log(`âœ… TrÃ¡mite creado: $
+export const dynamic = 'force-dynamic'
+{codigoTramite}`)
+      } else 
+export const dynamic = 'force-dynamic'
+{
+        console.log(`â„¹ï¸ TrÃ¡mite ya existe: $
+export const dynamic = 'force-dynamic'
+{codigoTramite}`)
       }
+export const dynamic = 'force-dynamic'
+
     }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
 
     const timestamp = new Date().toISOString()
-    console.log(`✨ Sincronización completada: ${clientesCreados} clientes, ${tramitesCreados} trámites`)
+export const dynamic = 'force-dynamic'
 
-    return NextResponse.json({
-      success: true,
-      message: 'Sincronización completada',
-      clientesCreados,
-      tramitesCreados,
-      timestamp,
-    })
-  } catch (error) {
-    console.error('Error en sincronización:', error)
+    console.log(`âœ¨ SincronizaciÃ³n completada: $
+export const dynamic = 'force-dynamic'
+{clientesCreados} clientes, ${tramitesCreados} trÃ¡mites`)
+
+export const dynamic = 'force-dynamic'
+
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Error en sincronización' },
-      { status: 500 }
-    )
-  }
-}
+export const dynamic = 'force-dynamic'
+{
+      success: true,
+export const dynamic = 'force-dynamic'
 
-export async function GET(req: NextRequest) {
-  try {
-    const session = await getServerSession(authOptions)
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+      message: 'SincronizaciÃ³n completada',
+export const dynamic = 'force-dynamic'
 
-    return NextResponse.json({
-      message: 'Para sincronizar, usa POST',
-      usage: 'POST /api/admin/sync-clientes-seguro',
+      clientesCreados,
+export const dynamic = 'force-dynamic'
+
+      tramitesCreados,
+export const dynamic = 'force-dynamic'
+
+      timestamp,
+export const dynamic = 'force-dynamic'
+
     })
-  } catch (error) {
-    return NextResponse.json({ error: 'Error' }, { status: 500 })
+export const dynamic = 'force-dynamic'
+
+  } catch (error) 
+export const dynamic = 'force-dynamic'
+{
+    console.error('Error en sincronizaciÃ³n:', error)
+export const dynamic = 'force-dynamic'
+
+    return NextResponse.json(
+export const dynamic = 'force-dynamic'
+
+      
+export const dynamic = 'force-dynamic'
+{ error: error instanceof Error ? error.message : 'Error en sincronizaciÃ³n' },
+      
+export const dynamic = 'force-dynamic'
+{ status: 500 }
+    )
+export const dynamic = 'force-dynamic'
+
   }
+export const dynamic = 'force-dynamic'
+
 }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+export async function GET(req: NextRequest) 
+export const dynamic = 'force-dynamic'
+{
+  try 
+export const dynamic = 'force-dynamic'
+{
+    const session = await getServerSession(authOptions)
+export const dynamic = 'force-dynamic'
+
+    if (!session) 
+export const dynamic = 'force-dynamic'
+{
+      return NextResponse.json(
+export const dynamic = 'force-dynamic'
+{ error: 'Unauthorized' }, { status: 401 })
+    }
+export const dynamic = 'force-dynamic'
+
+
+export const dynamic = 'force-dynamic'
+
+    return NextResponse.json(
+export const dynamic = 'force-dynamic'
+{
+      message: 'Para sincronizar, usa POST',
+export const dynamic = 'force-dynamic'
+
+      usage: 'POST /api/admin/sync-clientes-seguro',
+export const dynamic = 'force-dynamic'
+
+    })
+export const dynamic = 'force-dynamic'
+
+  } catch (error) 
+export const dynamic = 'force-dynamic'
+{
+    return NextResponse.json(
+export const dynamic = 'force-dynamic'
+{ error: 'Error' }, { status: 500 })
+  }
+export const dynamic = 'force-dynamic'
+
+}
+export const dynamic = 'force-dynamic'
+
