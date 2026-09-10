@@ -1,0 +1,371 @@
+{
+  "timestamp": "2026-09-09T18:48:42.720Z",
+  "categorias": [
+    {
+      "id": "cmtufu6vu0000mk3pmi6vpz5o",
+      "clave": "EXTRANJERIA",
+      "codigo": "EX-",
+      "nombre": "Extranjería General",
+      "descripcion": null,
+      "icono": "🌍",
+      "color": "#3b82f6",
+      "orden": 1,
+      "createdAt": "2026-09-09T18:34:45.978Z"
+    },
+    {
+      "id": "cmtufu6w00001mk3pk1lnj30u",
+      "clave": "EXTRANJERIA_MOVILIDAD",
+      "codigo": "MI-",
+      "nombre": "Extranjería (Movilidad)",
+      "descripcion": null,
+      "icono": "✈️",
+      "color": "#06b6d4",
+      "orden": 2,
+      "createdAt": "2026-09-09T18:34:45.985Z"
+    },
+    {
+      "id": "cmtufu6w50002mk3phlh1q02y",
+      "clave": "NACIONALIDAD",
+      "codigo": "NE-",
+      "nombre": "Nacionalidad",
+      "descripcion": null,
+      "icono": "🇪🇸",
+      "color": "#ec4899",
+      "orden": 3,
+      "createdAt": "2026-09-09T18:34:45.990Z"
+    },
+    {
+      "id": "cmtufu6wa0003mk3p3f4zr6qw",
+      "clave": "TRANSPORTE_DGT",
+      "codigo": "DGT-",
+      "nombre": "Conductores y Vehículos",
+      "descripcion": null,
+      "icono": "🚗",
+      "color": "#f59e0b",
+      "orden": 4,
+      "createdAt": "2026-09-09T18:34:45.995Z"
+    },
+    {
+      "id": "cmtufu6wg0004mk3plp8ag9wu",
+      "clave": "LABORAL",
+      "codigo": "LAB-",
+      "nombre": "Trámites Laborales",
+      "descripcion": null,
+      "icono": "💼",
+      "color": "#8b5cf6",
+      "orden": 5,
+      "createdAt": "2026-09-09T18:34:46.001Z"
+    },
+    {
+      "id": "cmtufu6wl0005mk3pryf7dm8y",
+      "clave": "FISCAL",
+      "codigo": "FIS-",
+      "nombre": "Trámites Fiscales",
+      "descripcion": null,
+      "icono": "💰",
+      "color": "#10b981",
+      "orden": 6,
+      "createdAt": "2026-09-09T18:34:46.005Z"
+    },
+    {
+      "id": "cmtufu6wq0006mk3pqw2hzgkh",
+      "clave": "OTROS",
+      "codigo": "TR-",
+      "nombre": "Otros Trámites",
+      "descripcion": null,
+      "icono": "📌",
+      "color": "#6b7280",
+      "orden": 7,
+      "createdAt": "2026-09-09T18:34:46.010Z"
+    }
+  ],
+  "tramites": [
+    {
+      "id": "cmtugb58j0007wdsbim0qmv3t",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Arraigo Sociolaboral",
+      "descripcion": "Nueva descripci�n de prueba",
+      "categoria": "cmtufu6vu0000mk3pmi6vpz5o",
+      "plantillasDisponibles": "[]",
+      "camposRequeridos": "[]",
+      "activo": true,
+      "createdAt": "2026-09-09T18:47:56.995Z",
+      "updatedAt": "2026-09-09T18:47:56.995Z"
+    },
+    {
+      "id": "cmtugb58o0008wdsbjz0zmipo",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Nacionalidad por residencia",
+      "descripcion": "Solicitud de nacionalidad española por residencia",
+      "categoria": "cmtufu6w50002mk3phlh1q02y",
+      "plantillasDisponibles": "[]",
+      "camposRequeridos": "[]",
+      "activo": true,
+      "createdAt": "2026-09-09T18:47:57.001Z",
+      "updatedAt": "2026-09-09T18:47:57.001Z"
+    },
+    {
+      "id": "cmtugb58t0009wdsbxq2cyq4j",
+      "tipoTramite": "Cambio de nombre",
+      "nombre": "Cambio de nombre",
+      "descripcion": "Trámite de cambio de nombre jllhhsdf",
+      "categoria": "cmtufu6wa0003mk3p3f4zr6qw",
+      "plantillasDisponibles": "[]",
+      "camposRequeridos": "[]",
+      "activo": true,
+      "createdAt": "2026-09-09T18:47:57.005Z",
+      "updatedAt": "2026-09-09T18:47:57.005Z"
+    }
+  ],
+  "tiposDocumento": [
+    {
+      "id": "cmtugb58z000bwdsbrb3se8qk",
+      "nombre": "Mandato de Representación",
+      "descripcion": null,
+      "icono": "📋",
+      "color": "#3b82f6",
+      "orden": 1,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.011Z"
+    },
+    {
+      "id": "cmtugb594000dwdsb5t60he41",
+      "nombre": "Contrato de Prestación",
+      "descripcion": null,
+      "icono": "📄",
+      "color": "#22c55e",
+      "orden": 2,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.016Z"
+    },
+    {
+      "id": "cmtugb599000fwdsb6t8c0l92",
+      "nombre": "Fraccionamiento de Pago",
+      "descripcion": null,
+      "icono": "📅",
+      "color": "#4f46e5",
+      "orden": 3,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.021Z"
+    },
+    {
+      "id": "cmtugb59e000hwdsb7g3dxt8b",
+      "nombre": "Factura Proforma",
+      "descripcion": null,
+      "icono": "💵",
+      "color": "#a855f7",
+      "orden": 4,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.026Z"
+    },
+    {
+      "id": "cmtugb59j000jwdsbx9pyz13b",
+      "nombre": "Autorización para Recurso",
+      "descripcion": null,
+      "icono": "⚖️",
+      "color": "#ea580c",
+      "orden": 5,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.031Z"
+    },
+    {
+      "id": "cmtugb59n000lwdsbys1d2eg1",
+      "nombre": "Renuncia al Trámite",
+      "descripcion": null,
+      "icono": "❌",
+      "color": "#dc2626",
+      "orden": 6,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.035Z"
+    },
+    {
+      "id": "cmtugb59s000nwdsb1e1xa27l",
+      "nombre": "Recibo",
+      "descripcion": null,
+      "icono": "🧾",
+      "color": "#06b6d4",
+      "orden": 7,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.040Z"
+    },
+    {
+      "id": "cmtugb59x000pwdsbzmjpz90h",
+      "nombre": "Resolución DGT",
+      "descripcion": null,
+      "icono": "📌",
+      "color": "#8b5cf6",
+      "orden": 8,
+      "categoriaId": null,
+      "createdAt": "2026-09-09T18:47:57.045Z"
+    },
+    {
+      "id": "cmtugb5a2000rwdsba89hhibf",
+      "nombre": "Requerimiento documentación",
+      "descripcion": null,
+      "icono": "📑",
+      "color": "#eab308",
+      "orden": 8,
+      "categoriaId": "cmtufu6vu0000mk3pmi6vpz5o",
+      "createdAt": "2026-09-09T18:47:57.050Z"
+    },
+    {
+      "id": "cmtugb5a7000twdsbq238e1ki",
+      "nombre": "Requerimiento pago tasas",
+      "descripcion": null,
+      "icono": "💼",
+      "color": "#22c55e",
+      "orden": 9,
+      "categoriaId": "cmtufu6vu0000mk3pmi6vpz5o",
+      "createdAt": "2026-09-09T18:47:57.055Z"
+    }
+  ],
+  "checkDocumentos": [
+    {
+      "id": "cmtugb5ad000uwdsb32l594mm",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Pasaporte válido",
+      "descripcion": "Pasaporte válido del solicitante",
+      "orden": 10,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 365,
+      "createdAt": "2026-09-09T18:47:57.061Z"
+    },
+    {
+      "id": "cmtugb5ai000vwdsb64qgbgz0",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Documentación de identidad",
+      "descripcion": "DNI u otro documento de identidad válido",
+      "orden": 20,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 365,
+      "createdAt": "2026-09-09T18:47:57.066Z"
+    },
+    {
+      "id": "cmtugb5am000wwdsbdrtatuo2",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Certificado de empadronamiento",
+      "descripcion": "Certificado actual de empadronamiento",
+      "orden": 30,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 90,
+      "createdAt": "2026-09-09T18:47:57.071Z"
+    },
+    {
+      "id": "cmtugb5aw000xwdsb0aigc72j",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Antecedentes penales",
+      "descripcion": "Certificado de antecedentes penales",
+      "orden": 40,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 180,
+      "createdAt": "2026-09-09T18:47:57.080Z"
+    },
+    {
+      "id": "cmtugb5b1000ywdsbv5f8csp6",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "Comprobante de medios económicos",
+      "descripcion": "Extractos bancarios o declaración de renta",
+      "orden": 50,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 90,
+      "createdAt": "2026-09-09T18:47:57.085Z"
+    },
+    {
+      "id": "cmtugb5b5000zwdsbncotcvjb",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Pasaporte válido",
+      "descripcion": "Pasaporte válido del solicitante",
+      "orden": 10,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 365,
+      "createdAt": "2026-09-09T18:47:57.090Z"
+    },
+    {
+      "id": "cmtugb5ba0010wdsbps1uz6ie",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Documentación de identidad",
+      "descripcion": "DNI u otro documento de identidad válido",
+      "orden": 20,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 365,
+      "createdAt": "2026-09-09T18:47:57.095Z"
+    },
+    {
+      "id": "cmtugb5bf0011wdsb5yuf3tgl",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Certificado de empadronamiento",
+      "descripcion": "Certificado actual de empadronamiento",
+      "orden": 30,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 90,
+      "createdAt": "2026-09-09T18:47:57.100Z"
+    },
+    {
+      "id": "cmtugb5bk0012wdsbcss61tnx",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Antecedentes penales",
+      "descripcion": "Certificado de antecedentes penales",
+      "orden": 40,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 180,
+      "createdAt": "2026-09-09T18:47:57.105Z"
+    },
+    {
+      "id": "cmtugb5bp0013wdsbp9fdf67d",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "Comprobante de medios económicos",
+      "descripcion": "Extractos bancarios o declaración de renta",
+      "orden": 50,
+      "tipoVencimiento": "documento",
+      "diasCaducidad": 90,
+      "createdAt": "2026-09-09T18:47:57.109Z"
+    },
+    {
+      "id": "cmtugb5bt0014wdsbznl0zm2l",
+      "tipoTramite": "Cambio de nombre",
+      "nombre": "ID Vendedor",
+      "descripcion": "Documento de Identidad o Tarjeta de Identidad de Extranjero de la persona física vendedora del vehículos",
+      "orden": 10,
+      "tipoVencimiento": null,
+      "diasCaducidad": null,
+      "createdAt": "2026-09-09T18:47:57.114Z"
+    }
+  ],
+  "plantillas": [
+    {
+      "id": "cmtugb5by0015wdsbauydtjfm",
+      "tipo": "mandato",
+      "tipoTramite": "Cambio de nombre",
+      "nombre": "Mandato-DGT",
+      "driveFileId": "1cAZJuVCQV9MUCStlLoygydT3By4WUVTG2FT4TEZccJ4",
+      "createdAt": "2026-09-09T18:47:57.119Z"
+    }
+  ],
+  "tasas": [
+    {
+      "id": "cmtugb5c30016wdsbfz9251mv",
+      "tipoTramite": "Arraigo Sociolaboral",
+      "nombre": "[{\"nombre\":\"Tasa Arraigo Sociolaboral\",\"importe\":38.28}]",
+      "importe": 0,
+      "createdAt": "2026-09-09T18:47:57.123Z",
+      "updatedAt": "2026-09-09T18:47:57.123Z"
+    },
+    {
+      "id": "cmtugb5c80017wdsbtg9kgvon",
+      "tipoTramite": "Nacionalidad por residencia",
+      "nombre": "[{\"nombre\":\"Tasa Nacionalidad\",\"importe\":104.05}]",
+      "importe": 0,
+      "createdAt": "2026-09-09T18:47:57.128Z",
+      "updatedAt": "2026-09-09T18:47:57.128Z"
+    },
+    {
+      "id": "cmtugb5cc0018wdsbnrm8zdmn",
+      "tipoTramite": "Cambio de nombre",
+      "nombre": "[]",
+      "importe": 0,
+      "createdAt": "2026-09-09T18:47:57.132Z",
+      "updatedAt": "2026-09-09T18:47:57.132Z"
+    }
+  ],
+  "documentosGenerados": []
+}

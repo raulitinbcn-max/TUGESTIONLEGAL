@@ -1,0 +1,124 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║               ⚡ SCRIPTS DE DESARROLLO - USO RÁPIDO                         ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+3 SCRIPTS PARA FACILITAR EL DESARROLLO:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  start.bat
+    ├─ Qué hace: Inicia el servidor de desarrollo
+    ├─ Dónde: http://localhost:3000
+    ├─ Cuándo: Cada vez que quieras trabajar
+    └─ Uso: Doble clic o: .\start.bat
+
+2️⃣  setup-db.bat
+    ├─ Qué hace: Configura la base de datos
+    ├─ Requiere: PostgreSQL corriendo + .env.local rellenado
+    ├─ Cuándo: PRIMERA VEZ (después de rellenar .env.local)
+    └─ Uso: Doble clic o: .\setup-db.bat
+
+3️⃣  studio.bat
+    ├─ Qué hace: Abre Prisma Studio (gestor visual de BD)
+    ├─ Dónde: http://localhost:5555
+    ├─ Cuándo: Para ver/editar datos sin SQL
+    └─ Uso: Doble clic o: .\studio.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ CONFIGURACIÓN INICIAL (5 PASOS):
+
+  1. Lee: docs/SETUP_GOOGLE_CLOUD.md          (30-45 min)
+  
+  2. Copia: .env.example → .env.local         (2 min)
+  
+  3. Edita: .env.local con tus credenciales   (5 min)
+  
+  4. Ejecuta: setup-db.bat                    (5 min)
+  
+  5. Ejecuta: start.bat                       (inicia server)
+  
+  → Abre: http://localhost:3000
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 USO DIARIO (DESPUÉS DE CONFIGURAR):
+
+  MAÑANA:
+    1. Doble clic en start.bat
+    2. Edita código en VS Code
+    3. El servidor se reinicia automáticamente
+    4. Prueba en http://localhost:3000
+
+  PARA GESTIONAR DATOS:
+    1. En otra ventana: Doble clic en studio.bat
+    2. Abre http://localhost:5555
+    3. Ver/crear/editar datos
+
+  AL TERMINAR:
+    1. Presiona Ctrl+C en ventana de start.bat
+    2. Cierra
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  REQUISITOS ANTES DE USAR:
+
+  ✅ PostgreSQL instalado y corriendo
+  ✅ .env.local creado y rellenado
+  ✅ npm install completado (node_modules existe)
+  ✅ Credenciales de Google configuradas
+
+  Si falta algo, los scripts te lo dirán con mensajes de error claros.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 TROUBLESHOOTING RÁPIDO:
+
+  "package.json no encontrado"
+    → Ejecuta desde: c:\Users\Raúl\TUGESTIONLEGAL
+
+  ".env.local no encontrado"
+    → Copia .env.example a .env.local
+    → Rellena con tus variables
+
+  "Cannot connect to database"
+    → Inicia PostgreSQL
+    → Verifica DATABASE_URL en .env.local
+
+  "Google credentials not configured"
+    → Rellena variables de Google en .env.local
+    → Ve a: docs/SETUP_GOOGLE_CLOUD.md
+
+  Más ayuda en: SCRIPTS.md
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 TIPS:
+
+  • Los scripts hacen todo automáticamente
+  • Ves mensajes de error claros si algo falla
+  • Puedes abrir múltiples scripts en ventanas diferentes
+  • hot-reload: Los cambios en código se reflejan automáticamente
+  • Prisma Studio: Abre en otra ventana, no detiene start.bat
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ LISTO PARA EMPEZAR:
+
+  1. Doble clic en: setup-db.bat          (configura BD)
+  2. Doble clic en: start.bat             (inicia server)
+  3. Abre: http://localhost:3000
+  4. Inicia sesión con Google
+  5. ¡A desarrollar!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Para más detalles: Lee SCRIPTS.md
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                  ¡Bienvenido a TuGestiónLegal! 🚀                           ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝

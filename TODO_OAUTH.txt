@@ -1,0 +1,175 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║              ✅ TODO - Setup OAuth para TuGestiónLegal                       ║
+║                                                                              ║
+║                           20 minutos total                                   ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+ANTES DE EMPEZAR:
+  [ ] PostgreSQL está corriendo
+  [ ] Tienes acceso a Google Drive
+  [ ] Tienes Google OAuth configurado en Google Cloud
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 PASO 1: CREAR CARPETAS EN GOOGLE DRIVE (5 minutos)
+
+  URL: https://drive.google.com
+
+  [ ] Crear carpeta: "TuGestiónLegal"
+      [ ] Subcarpeta: "Plantillas"
+      [ ] Subcarpeta: "Entrada"
+          [ ] Sub-subcarpeta: "Sin clasificar"
+      [ ] Subcarpeta: "Clientes"
+
+  Estructura final:
+  TuGestiónLegal/
+  ├── Plantillas/
+  ├── Entrada/
+  │   └── Sin clasificar/
+  └── Clientes/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 PASO 2: COPIAR IDs DE CARPETAS (5 minutos)
+
+  Para CADA carpeta:
+  1. Abre la carpeta
+  2. Copia el ID de la URL: https://drive.google.com/drive/folders/[ESTE-ID]
+
+  [ ] PLANTILLAS - ID: _________________________________
+  [ ] ENTRADA - ID: _________________________________
+  [ ] SIN CLASIFICAR - ID: _________________________________
+  [ ] CLIENTES - ID: _________________________________
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 PASO 3: RELLENAR .env.local (5 minutos)
+
+  Archivo: c:\Users\Raúl\TUGESTIONLEGAL\.env.local
+
+  [ ] GOOGLE_CLIENT_ID="..."
+      (De Google Cloud Console → Credenciales → OAuth)
+
+  [ ] GOOGLE_CLIENT_SECRET="..."
+      (De Google Cloud Console → Credenciales → OAuth)
+
+  [ ] DRIVE_FOLDER_PLANTILLAS_ID="[ID que copiaste]"
+
+  [ ] DRIVE_FOLDER_ENTRADA_ID="[ID que copiaste]"
+
+  [ ] DRIVE_FOLDER_SIN_CLASIFICAR_ID="[ID que copiaste]"
+
+  [ ] DRIVE_FOLDER_CLIENTES_ID="[ID que copiaste]"
+
+  [ ] DATABASE_URL="postgresql://..." (ya debería estar)
+
+  [ ] NEXTAUTH_SECRET="..." (ya debería estar o generar nuevo)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 PASO 4: EJECUTAR APP (5 minutos)
+
+  En PowerShell (en carpeta del proyecto):
+
+  [ ] npx prisma migrate dev --name init
+      (Espera a que termine - crea BD)
+
+  [ ] npm run dev
+      (Espera a que diga "ready - started server on...")
+
+  [ ] Abre: http://localhost:3000
+
+  [ ] Haz click en: "Iniciar sesión con Google"
+
+  [ ] Aprueba los permisos (Drive, Docs, Perfil)
+
+  [ ] ✅ ¡Ya dentro de la app!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFICAR QUE FUNCIONA (5 minutos)
+
+  [ ] Estoy logueado (veo mi email en la esquina)
+
+  [ ] Voy a: "Nuevo Trámite"
+
+  [ ] Relleno el formulario:
+      [ ] Nombre completo
+      [ ] Tipo de trámite
+      [ ] Email
+      [ ] Teléfono
+
+  [ ] Click: "Crear Trámite"
+
+  [ ] Voy a Google Drive y verifico:
+      [ ] Se creó una carpeta nueva en "Clientes/"
+      [ ] El nombre de la carpeta es: "TR-00001_mi-nombre"
+
+  [ ] ✅ ¡FUNCIONA!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 TROUBLESHOOTING
+
+  "Google credentials not configured"
+    [ ] Verifica GOOGLE_CLIENT_ID en .env.local
+    [ ] Verifica GOOGLE_CLIENT_SECRET en .env.local
+    [ ] Reinicia: npm run dev
+
+  "Cannot create folder in Drive"
+    [ ] Verifica que copiaste IDs correctamente
+    [ ] Verifica que DRIVE_FOLDER_CLIENTES_ID está rellenado
+    [ ] Reinicia: npm run dev
+
+  "Cannot connect to database"
+    [ ] Verifica que PostgreSQL está corriendo
+    [ ] Verifica DATABASE_URL en .env.local
+    [ ] Reinicia: npm run dev
+
+  Login redirige a error page
+    [ ] Verifica que OAuth URIs incluyen:
+        http://localhost:3000/api/auth/callback/google
+    [ ] En Google Cloud → Credenciales → OAuth
+    [ ] Agrégalo si falta
+    [ ] Reinicia: npm run dev
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 RESUMEN
+
+  Setup OAuth:           ✅ YA HECHO (código actualizado)
+  Scopes de Drive:       ✅ YA HECHO (NextAuth configurado)
+  Types de TypeScript:   ✅ YA HECHO (types/next-auth.d.ts)
+
+  Tu trabajo:
+    [ ] Crear carpetas en Drive (5 min)
+    [ ] Copiar IDs (5 min)
+    [ ] Rellenar .env.local (5 min)
+    [ ] Ejecutar app (5 min)
+    [ ] Verificar (5 min)
+
+  TOTAL: 25 minutos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ SIGUIENTES PASOS (Después de verificar)
+
+  1. Crear plantillas de Google Docs en carpeta "Plantillas/"
+  2. Probar generación de documentos
+  3. Setup de Fase 2 (clasificación automática)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📖 GUÍAS COMPLETAS
+
+  - GUIA_RAPIDA_OAUTH.md          ← EMPIEZA AQUÍ
+  - docs/SETUP_OAUTH_SIMPLE.md    ← Más detalles
+  - docs/SETUP_OAUTH_DRIVE.md     ← Guía técnica completa
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                    ¡Vamos! Solo 20 minutos. 🚀                              ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
