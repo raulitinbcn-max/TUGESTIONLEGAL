@@ -79,7 +79,29 @@ async function seed() {
     }
   }
 
-  console.log('✨ Seed completado')
+  console.log('✨ Seed categorías completado')
+
+  // Agregar usuarios autorizados
+  console.log('🌱 Agregando usuarios autorizados...')
+  const usuarios = [
+    { email: 'raulitinbcn@gmail.com', nombre: 'Raúl Admin', rol: 'admin' },
+    { email: 'raul@pestcontrol2000.com', nombre: 'Raúl', rol: 'admin' },
+    { email: 'pau.iglesias@travesialegal.com', nombre: 'Pau Iglesias', rol: 'admin' },
+  ]
+
+  for (const user of usuarios) {
+    const usuarioAutorizado = await db.usuarioAutorizado.upsert({
+      where: { email: user.email },
+      update: {},
+      create: {
+        email: user.email,
+        nombre: user.nombre,
+        rol: user.rol,
+        activo: true,
+      },
+    })
+    console.log(`✅ Usuario autorizado: ${usuarioAutorizado.email}`)
+  }
 }
 
 seed()
