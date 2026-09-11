@@ -17,7 +17,6 @@ export default function UsuariosPage() {
   const [loading, setLoading] = useState(true)
   const [email, setEmail] = useState('')
   const [nombre, setNombre] = useState('')
-  const [rol, setRol] = useState('usuario')
   const [isAdding, setIsAdding] = useState(false)
 
   useEffect(() => {
@@ -50,14 +49,13 @@ export default function UsuariosPage() {
       const res = await fetch('/api/admin/usuarios', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, nombre, rol }),
+        body: JSON.stringify({ email, nombre }),
       })
 
       if (res.ok) {
-        toast.success('Usuario agregado')
+        toast.success('✅ Usuario agregado')
         setEmail('')
         setNombre('')
-        setRol('usuario')
         cargarUsuarios()
       } else {
         const error = await res.json()
@@ -70,22 +68,22 @@ export default function UsuariosPage() {
     }
   }
 
-  const desactivarUsuario = async (id: string) => {
+  const eliminarUsuario = async (id: string) => {
+    if (!confirm('¿Eliminar este usuario?')) return
+
     try {
       const res = await fetch(`/api/admin/usuarios/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ activo: false }),
+        method: 'DELETE',
       })
 
       if (res.ok) {
-        toast.success('Usuario desactivado')
+        toast.success('✅ Usuario eliminado')
         cargarUsuarios()
       } else {
-        toast.error('Error al desactivar usuario')
+        toast.error('Error al eliminar usuario')
       }
     } catch (error) {
-      toast.error('Error al desactivar usuario')
+      toast.error('Error al eliminar usuario')
     }
   }
 
@@ -95,110 +93,98 @@ export default function UsuariosPage() {
 
   return (
     <div className="p-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">👥 Gestionar Usuarios Autorizados</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">👥 Usuarios Autorizados</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Formulario para agregar usuario */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Agregar Usuario</h2>
-          <form onSubmit={agregarUsuario} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Correo Electrónico *
-              </label>
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="usuario@ejemplo.com"
-              />
-            </div>
+      {/* Input para agregar usuario */}
+      <div className="bg-white rounded-lg shadow p-6 mb-6">
+        <form onSubmit={agregarUsuario} className="flex gap-3">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Correo electrónico"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            placeholder="Nombre para mostrar (opcional)"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            disabled={isAdding}
+            className="bg-green-600 hover:bg-green-700 disabled:bg-gray-400 text-white font-semibold py-2 px-6 rounded-lg transition"
+          >
+            {isAdding ? '⏳' : '➕ Agregar'}
+          </button>
+        </form>
+      </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Nombre para Mostrar
-              </label>
-              <input
-                type="text"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Nombre del usuario"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Rol
-              </label>
-              <select
-                value={rol}
-                onChange={(e) => setRol(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="usuario">Usuario</option>
-                <option value="admin">Administrador</option>
-              </select>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isAdding}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-2 px-4 rounded-lg transition"
-            >
-              {isAdding ? 'Agregando...' : 'Agregar Usuario'}
-            </button>
-          </form>
-        </div>
-
-        {/* Lista de usuarios */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            Usuarios Autorizados ({usuarios.length})
-          </h2>
-
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+      {/* Tabla de usuarios */}
+      <div className="bg-white rounded-lg shadow overflow-hidden">
+        <table className="w-full">
+          <thead className="bg-gray-100 border-b">
+            <tr>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                Nombre
+              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-900">
+                Correo Electrónico
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
+                Estado
+              </th>
+              <th className="px-6 py-3 text-center text-sm font-semibold text-gray-900">
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody>
             {usuarios.length === 0 ? (
-              <p className="text-gray-600 text-sm">No hay usuarios agregados aún</p>
+              <tr>
+                <td colSpan={4} className="px-6 py-8 text-center text-gray-600">
+                  No hay usuarios agregados aún
+                </td>
+              </tr>
             ) : (
               usuarios.map((usuario) => (
-                <div
+                <tr
                   key={usuario.id}
-                  className={`p-3 rounded-lg border ${
-                    usuario.activo
-                      ? 'bg-green-50 border-green-200'
-                      : 'bg-gray-50 border-gray-200 opacity-60'
+                  className={`border-b hover:bg-gray-50 ${
+                    !usuario.activo ? 'bg-gray-50 opacity-60' : ''
                   }`}
                 >
-                  <div className="flex justify-between items-start mb-2">
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-900">
-                        {usuario.nombre || usuario.email}
-                      </p>
-                      <p className="text-xs text-gray-600">{usuario.email}</p>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Rol: <span className="font-medium">{usuario.rol}</span>
-                      </p>
-                    </div>
-                    {usuario.activo && (
-                      <button
-                        onClick={() => desactivarUsuario(usuario.id)}
-                        className="text-red-600 hover:text-red-800 text-sm font-medium"
-                      >
-                        Desactivar
-                      </button>
-                    )}
-                  </div>
-                  {!usuario.activo && (
-                    <p className="text-xs text-red-600 font-medium">DESACTIVADO</p>
-                  )}
-                </div>
+                  <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                    {usuario.nombre || '—'}
+                  </td>
+                  <td className="px-6 py-4 text-sm text-gray-700">{usuario.email}</td>
+                  <td className="px-6 py-4 text-center">
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                        usuario.activo
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-red-100 text-red-800'
+                      }`}
+                    >
+                      {usuario.activo ? '✅ Activo' : '❌ Desactivado'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-center">
+                    <button
+                      onClick={() => eliminarUsuario(usuario.id)}
+                      className="text-red-600 hover:text-red-800 font-medium text-sm"
+                    >
+                      🗑️ Eliminar
+                    </button>
+                  </td>
+                </tr>
               ))
             )}
-          </div>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   )
