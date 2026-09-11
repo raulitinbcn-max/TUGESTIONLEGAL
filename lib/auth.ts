@@ -1,5 +1,6 @@
 import { NextAuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import { db } from './db'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -18,10 +19,19 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile }) {
       console.log('SignIn callback:', { user: user?.email, account: account?.provider })
-      // Aquí puedes restringir el dominio de email si es necesario
-      // if (!user.email?.endsWith('@tugestorian.com')) {
-      //   return false
-      // }
+
+      if (!user.email) return false
+
+      // Verificar si el email está en la whitelist
+      const usuarioAutorizado = await db.usuarioAutorizado.findUnique({
+        where: { email: user.email }
+      })
+
+      if (!usuarioAutorizado || !usuarioAutorizado.activo) {
+        console.log('Usuario no autorizado:', user.email)
+        return false
+      }
+
       return true
     },
     async jwt({ token, user, account }) {

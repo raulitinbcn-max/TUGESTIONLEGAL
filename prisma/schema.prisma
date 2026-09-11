@@ -283,3 +283,15 @@ model ChecklistItem {
   @@map("checklist_items")
 }
 
+model UsuarioAutorizado {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  nombre    String?
+  rol       String   @default("usuario")
+  activo    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("usuarios_autorizados")
+}
+
