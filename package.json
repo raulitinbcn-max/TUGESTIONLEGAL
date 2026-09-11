@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node scripts/auto-sync-clientes.js & node scripts/auto-backup-drive.js & node scripts/auto-backup-tramites-drive.js & next dev",
-    "postinstall": "prisma generate && prisma migrate deploy --skip-generate || true",
+    "postinstall": "prisma generate && prisma migrate deploy --skip-generate && node prisma/seed.js || true",
     "build": "next build",
     "start": "node scripts/auto-sync-clientes.js & node scripts/auto-backup-drive.js & node scripts/auto-backup-tramites-drive.js & next start",
     "lint": "next lint",
